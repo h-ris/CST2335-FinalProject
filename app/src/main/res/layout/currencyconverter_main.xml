@@ -7,25 +7,25 @@
     tools:context=".CcyConverterMainActivity" >
 
     <EditText
-        android:id="@+id/amountEditText"
+        android:id="@+id/amtTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="100dp"
         android:hint="Amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/destinationCurrencyEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/destinationTxt" />
 
     <EditText
-        android:id="@+id/sourceCurrencyEditText"
+        android:id="@+id/sourceTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/amountEditText"
+        android:layout_below="@id/amtTxt"
         android:hint="Source Currency"
-        app:layout_constraintBottom_toTopOf="@+id/destinationCurrencyEditText"
+        app:layout_constraintBottom_toTopOf="@+id/destinationTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,31 +33,44 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/destinationCurrencyEditText"
+        android:id="@+id/destinationTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sourceCurrencyEditText"
+        android:layout_below="@id/sourceTxt"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="64dp"
         android:hint="Destination Currency"
-        app:layout_constraintBottom_toTopOf="@+id/amountEditText"
+        app:layout_constraintBottom_toTopOf="@+id/amtTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/convertButton"
+        android:id="@+id/convertBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/destinationCurrencyEditText"
+        android:layout_below="@id/destinationTxt"
         android:layout_marginBottom="100dp"
         android:text="Convert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amountEditText"
+        app:layout_constraintTop_toBottomOf="@+id/amtTxt"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/resultAmt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/convertBtn"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="330dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
