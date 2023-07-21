@@ -1,8 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".BearImageMainActivity">
+
+    <TextView
+        android:id="@+id/BearText"
+        android:layout_width="409dp"
+        android:layout_height="38dp"
+        android:text="Bear Image Generator"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/width"
+        android:layout_width="81dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:hint="Width"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/height"
+        android:layout_width="81dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="80dp"
+        android:ems="10"
+        android:hint="Height"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="188dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/BearText"
+        app:srcCompat="@android:drawable/btn_dialog" />
+
+    <Button
+        android:id="@+id/generateButton"
+        android:layout_width="165dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginBottom="488dp"
+        android:text="Generate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="184dp"
+        android:layout_marginBottom="160dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
