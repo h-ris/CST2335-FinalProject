@@ -28,7 +28,11 @@ public class BearImageMainActivity extends AppCompatActivity {
         height = findViewById(R.id.height);
         generateButton = findViewById(R.id.generateButton);
 
+        generateButton.setOnClickListener(clk -> {
+//            if (width.Integer.parseInt)
 
+
+        });
 
 
     }
