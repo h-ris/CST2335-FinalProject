@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import algonquin.cst2335.cst2335_finalproject.databinding.ActivityMainBinding;
+//import algonquin.cst2335.cst2335_finalproject.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
