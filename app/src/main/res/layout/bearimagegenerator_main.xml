@@ -12,6 +12,7 @@
         android:layout_height="38dp"
         android:text="@string/bear_app_name"
         android:textSize="20dp"
+        android:background="@android:color/holo_purple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +73,15 @@
         android:layout_marginBottom="160dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/helpMenu"
+        android:layout_width="57dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="60dp"
+        android:background="@android:color/holo_purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
