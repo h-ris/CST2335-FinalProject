@@ -10,4 +10,8 @@
     <string name="gen_button">Generate</string>
 
 
+    <string-array name="helparray">
+        <item>Help</item>
+    </string-array>
+
 </resources>
