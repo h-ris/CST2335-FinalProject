@@ -16,11 +16,10 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //button for Trivia Question Database
-//        binding.button.setOnClickListener(click -> {
-//
-//        });
-//
+        binding.buttonTrivia.setOnClickListener(click -> {
+            Intent toTriviaRoom = new Intent(this, TriviaRoomActivity.class);
+            startActivity(toTriviaRoom);
+        });
         //button for Bear Image Generator
 //        binding.button2.setOnClickListener(click -> {
 //
@@ -32,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         //button for Currency Converter
-        binding.button4.setOnClickListener(click -> {
+        binding.buttonCurrency.setOnClickListener(click -> {
             Intent toCcyConverter = new Intent(this, CcyConverterMainActivity.class);
             startActivity(toCcyConverter);
         });
+
     }
 }

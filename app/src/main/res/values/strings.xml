@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">CST2335_FinalProject</string>
+    <string name="trivia_room">Trivia Room</string>
+    <string name="trivia_top_10">Top 10</string>
+    <string name="exit">Exit</string>
+    <string name="start">Start</string>
+    <string name="trivia_question_andre">Trivia Question Database\n by Andre Azevedo</string>
+    <string name="bear_image_daniel">Bear Image Generator\n by Daniel Stewart</string>
+    <string name="flight_tracker_stefan">Aviation Stack Flight Tracker\n by Stefan Stivicic</string>
+    <string name="currency_converter_huixin">Currency Converter\n by Huixin Xu</string>
+    <string name="welcome">Welcome to CST2335 Final Project</string>
+    <string name="group">Warriors of The Endless Code</string>
+    <string name="question_placeholder">This is a question place holder that is used by the Jedi order to emulate a really long question. Does it work tho?</string>
+    <string name="optionplaceholder">This is one option!</string>
+    <string name="longanswer">This is a very long option placeholder for a answer as long as the world!</string>
+    <string name="next">Next</string>
 </resources>
