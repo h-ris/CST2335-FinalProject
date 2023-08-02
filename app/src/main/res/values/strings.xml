@@ -18,4 +18,9 @@
     <string name="optionplaceholder">This is one option!</string>
     <string name="longanswer">This is a very long option placeholder for a answer as long as the world!</string>
     <string name="next">Next</string>
+    <string name="your_score">Your Score: </string>
+    <string name="score_place_holder">100</string>
+    <string name="user_name">User name</string>
+    <string name="done">Done</string>
+    <string name="sorry_no_score">Sorry, you\'re out of \nthe top 10!</string>
 </resources>

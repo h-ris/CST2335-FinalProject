@@ -1,2 +1,3 @@
-1 - How should I use recyclerView? (Just to load top scores?)
-2 - How to get selected radio button?
+1 - Can I delete the fragment classes when I create an xml fragment?
+2 - Can we set all export properties in the AndroidManifest to False? Only mine is set to false.
+    Can the MainActivity export property be set to false?

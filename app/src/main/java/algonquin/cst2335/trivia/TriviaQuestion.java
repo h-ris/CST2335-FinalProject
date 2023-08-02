@@ -1,23 +1,31 @@
 package algonquin.cst2335.trivia;
 
-import com.google.gson.annotations.SerializedName;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Arrays;
 import java.util.List;
 
 public class TriviaQuestion {
 
-    @SerializedName("category")
     private String category;
-    @SerializedName("type")
     private String type;
-    @SerializedName("difficulty")
     private String difficulty;
-    @SerializedName("question")
     private String question;
-    @SerializedName("correct_answer")
     private String correctAnswer;
-    @SerializedName("incorrect_answers")
     private List<String> incorrectAnswers;
+
+    public TriviaQuestion(JSONObject questionObject) throws JSONException, UnsupportedEncodingException {
+        this.category = decode(questionObject.getString("category"));
+        this.type = decode(questionObject.getString("type"));
+        this.difficulty = decode(questionObject.getString("difficulty"));
+        this.question = decode(questionObject.getString("question"));
+        this.correctAnswer = decode(questionObject.getString("correct_answer"));
+        this.incorrectAnswers = Arrays.asList(decode(questionObject.getString("incorrect_answers"))
+                .replace("[\"", "").replace("\"]", "").split("\",\""));
+    }
 
     public String getCategory() {
         return category;
@@ -65,5 +73,9 @@ public class TriviaQuestion {
 
     public void setIncorrectAnswers(List<String> incorrectAnswers) {
         this.incorrectAnswers = incorrectAnswers;
+    }
+
+    private String decode(String apiString) throws UnsupportedEncodingException {
+        return URLDecoder.decode(apiString, "UTF-8");
     }
 }

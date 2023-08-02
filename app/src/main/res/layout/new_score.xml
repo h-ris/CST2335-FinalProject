@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/scoreTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:background="@color/city"
+        android:text="@string/your_score"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/userScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="100sp"
+        android:gravity="center"
+        android:layout_below="@+id/scoreTitle"
+        android:text="@string/score_place_holder"/>
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userScore"
+        android:hint="@string/user_name"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:maxLength="20"
+        android:autofillHints="username"
+        android:inputType="textCapSentences" />
+
+    <TextView
+        android:id="@+id/sorryScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userName"
+        android:text="@string/sorry_no_score"
+        android:textAlignment="center"
+        android:textSize="27sp"
+        android:paddingBottom="20dp"
+        />
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/done"
+        android:textSize="35sp"
+        android:layout_below="@+id/sorryScore"/>
+
+
+</RelativeLayout>

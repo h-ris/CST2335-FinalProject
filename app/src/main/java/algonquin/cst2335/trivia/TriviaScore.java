@@ -25,4 +25,8 @@ public class TriviaScore {
     public void addScore(int score) {
         this.score = this.score + score;
     }
+
+    public String getScoreString() {
+        return score + "";
+    }
 }
