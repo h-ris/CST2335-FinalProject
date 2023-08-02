@@ -1,14 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CST2335_FinalProject</string>
-
-
-
-    //Daniel's Bear Gen Strings
     <string name="bear_app_name">Bear Image Generator</string>
     <string name="width_edittext">Width</string>
     <string name="height_edittext">Height</string>
     <string name="gen_button">Generate</string>
     <string name="toolbar_title">Bear Image Generator</string>
-
-
 </resources>

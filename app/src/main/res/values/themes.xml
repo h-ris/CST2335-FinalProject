@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.CST2335_FinalProject" parent="Base.Theme.CST2335_FinalProject" />
+    <style name="Theme.CST2335_BearActivity" parent="Theme.Material3.DayNight"></style>
 </resources>
