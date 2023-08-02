@@ -2,9 +2,7 @@ package algonquin.cst2335.cst2335_finalproject;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -50,6 +47,9 @@ import algonquin.cst2335.cst2335_finalproject.databinding.*;
 
 /**
  * Currency converter created for CST2335 Final Project.
+ * This activity allows users to convert currency from one unit to another and
+ * save favorite conversions to a list. It uses Volley library for API requests
+ * and Room database to store favorite conversions.
  * @author Huixin Xu
  * @version 1.0
  */
@@ -69,10 +69,6 @@ public class CcyConverterMainActivity extends AppCompatActivity {
     private Toolbar ccyToolbar;
     private ImageView ccyAddlist;
 
-//    private String fromCcyUnit;
-//    private String toCcyUnit;
-//    private String fromCcyAmt;
-//    private String ccyConvertedAmt;
     private String ccyConvertedTime="";
 
     private RequestQueue requestQueue;
@@ -80,7 +76,10 @@ public class CcyConverterMainActivity extends AppCompatActivity {
     private static final String APIkey = "b29a0a8b0217704ebec9a1c47daf29639550ce8a";
 
 
-
+    /**
+     * Called when the activity is created. Initializes components and sets up listeners.
+     * @param savedInstanceState The saved instance state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -258,6 +257,10 @@ public class CcyConverterMainActivity extends AppCompatActivity {
 
     CcyListItem selectedItem;
     int rowClicked;
+    /**
+     * A ViewHolder class to represent a single row in the RecyclerView.
+     * This class holds references to the views for a single currency conversion item.
+     */
     public class MyRowHolder extends RecyclerView.ViewHolder{
         TextView ccy_from_unit;
         TextView ccy_to_unit;
@@ -284,13 +287,21 @@ public class CcyConverterMainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Helper method to display a Toast message on the screen.
+     * @param str The message to display.
+     */
     public void makeToast(String str) {
         Toast toast = Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT);
         toast.show();
     }
 
 
-    // Create tool bar menu
+    /**
+     * Creates the options menu in the Toolbar.
+     * @param menu The menu to inflate.
+     * @return True if the menu is created successfully.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -298,7 +309,11 @@ public class CcyConverterMainActivity extends AppCompatActivity {
         return true;
     }
 
-    // Behaviour for selecting menu options
+    /**
+     * Handles actions when a menu item is selected from the Toolbar.
+     * @param item The selected menu item.
+     * @return True if the action is handled successfully.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         String aboutMsg = "Currency Converter created by Huixin Xu (041062218)";
@@ -350,6 +365,12 @@ public class CcyConverterMainActivity extends AppCompatActivity {
         return true;
     }
 
+
+    /**
+     * Formats the currency amount to two decimal places to display in a user-friendly format.
+     * @param value The currency amount to format.
+     * @return The formatted currency amount as a string.
+     */
     private String formatAmount(String value){
         double amt = Double.parseDouble(value);
         DecimalFormat format = new DecimalFormat("#.##");
