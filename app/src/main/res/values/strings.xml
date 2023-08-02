@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">CST2335_FinalProject</string>
+
     <string name="bear_app_name">Bear Image Generator</string>
     <string name="width_edittext">Width</string>
     <string name="height_edittext">Height</string>
@@ -23,4 +24,17 @@
     <string name="user_name">User name</string>
     <string name="done">Done</string>
     <string name="sorry_no_score">Sorry, you\'re out of \nthe top 10!</string>
+  
+    <string-array name="ccyList">
+    <item>CAD - Canadian Dollar</item>
+    <item>USD - US Dollar</item>
+    <item>AUD - Australian Dollar</item>
+    <item>EUR - Euro</item>
+    <item>GBP - British Pound</item>
+    <item>INR - Indian Rupee</item>
+    <item>JPY - Japanese Yen</item>
+    <item>HKD - Hong Kong Dollar</item>
+    <item>CNY - Chinese Yuan</item>
+    </string-array>
+
 </resources>
