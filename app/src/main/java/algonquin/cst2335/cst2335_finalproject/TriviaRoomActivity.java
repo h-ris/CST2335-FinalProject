@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,10 +35,13 @@ import algonquin.cst2335.cst2335_finalproject.databinding.ActivityTriviaRoomBind
 import algonquin.cst2335.trivia.ScoreAdapter;
 import algonquin.cst2335.trivia.TriviaQuestion;
 import algonquin.cst2335.trivia.TriviaScore;
+import algonquin.cst2335.trivia.TriviaScoreDAO;
+import algonquin.cst2335.trivia.TriviaScoreDatabase;
 
 public class TriviaRoomActivity extends AppCompatActivity {
 
     private static final String API_URL = "https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986";
+    public static final int TOP_10_SIZE = 10;
     ActivityTriviaRoomBinding binding;
     private AlertDialog gameDialog;
     private AlertDialog scoreDialog;
@@ -55,6 +62,7 @@ public class TriviaRoomActivity extends AppCompatActivity {
     private Button btnDone;
     private List<TriviaScore> top10;
     private ScoreAdapter adapter;
+    private TriviaScoreDAO tsDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +71,7 @@ public class TriviaRoomActivity extends AppCompatActivity {
         binding = ActivityTriviaRoomBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // TODO load top 10 from DB
-        loadTop10list();
-
+        dbInit();
         loadApiQuestions();
         buildGameDialog();
         buildScoreDialog();
@@ -83,9 +89,16 @@ public class TriviaRoomActivity extends AppCompatActivity {
         });
     }
 
-    private void loadTop10list() {
-        // load from DB then one by one
+    private void dbInit() {
         top10 = new ArrayList<>();
+        TriviaScoreDatabase db = TriviaScoreDatabase.getInstance(getApplicationContext());
+        tsDAO = db.tsDAO();
+        // TODO error here on getAllScores, App Inspection after DB init does not show any DB created
+//        top10 = tsDAO.getAllScores();
+        addFakeData();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            top10.sort(new TriviaScore());
+        }
     }
 
     /**
@@ -133,16 +146,51 @@ public class TriviaRoomActivity extends AppCompatActivity {
         btnDone.setOnClickListener(view -> {
             if (!etUsername.getText().toString().trim().equals("")) {
                 currentScore.setUserName(etUsername.getText().toString());
-                top10.add(currentScore);
-                // TODO add comparable to score and order top10 list
-                adapter.notifyDataSetChanged();
+                addNewScore();
+                adapter.notifyItemInserted(top10.indexOf(currentScore));
             }
             etUsername.setText("");
             scoreDialog.dismiss();
             loadApiQuestions();
+            betterLuckSnack();
+            Toast.makeText(TriviaRoomActivity.this, "New questions loaded!", Toast.LENGTH_SHORT).show();
         });
 
         scoreDialog = builder.create();
+    }
+
+    /**
+     * Method that shows a Snackbar message at the top of the screen if the player didn't get on
+     * the Top 10 list.
+     */
+    private void betterLuckSnack() {
+        if (!top10.contains(currentScore)) {
+            Snackbar snack = Snackbar.make(binding.gameLayout, "Better luck next time!", Snackbar.LENGTH_LONG);
+            View snackView = snack.getView();
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackView.getLayoutParams();
+            params.gravity = Gravity.TOP;
+            snackView.setLayoutParams(params);
+            snack.show();
+        }
+    }
+
+    /**
+     * Method that analyses the current user score and if applicable adds it to the Top 10 list.
+     */
+    private void addNewScore() {
+        if (top10.size() == TOP_10_SIZE) {
+            TriviaScore lastPlace = top10.get(top10.size() - 1);
+
+            if (currentScore.getScore() > lastPlace.getScore()) {
+                top10.remove(top10.size() - 1);
+                top10.add(currentScore);
+            }
+        } else {
+            top10.add(currentScore);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            top10.sort(new TriviaScore());
+        }
     }
 
     /**
@@ -169,7 +217,7 @@ public class TriviaRoomActivity extends AppCompatActivity {
         Button next = gameView.findViewById(R.id.btnTriviaNext);
         next.setOnClickListener(view -> {
             int rawId = 0;
-            if (userAnswer.getText().equals(currentQuestion.getCorrectAnswer())) {
+            if (userAnswer != null && userAnswer.getText().equals(currentQuestion.getCorrectAnswer())) {
                 currentScore.addScore(10);
                 rawId = R.raw.right;
             } else {
@@ -221,5 +269,19 @@ public class TriviaRoomActivity extends AppCompatActivity {
            optionButtons.remove(randomIndex);
         }
         optionButtons.get(0).setText(currentQuestion.getCorrectAnswer());
+        Toast.makeText(this, "" + currentQuestion.getCorrectAnswer(), Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Loading placeholder data for testing purposes.
+     */
+    private void addFakeData() {
+        TriviaScore ts;
+        for (int i = 0; i < 5; i++) {
+            ts = new TriviaScore();
+            ts.setUserName("Myname" + i);
+            ts.setScore(i*10);
+            top10.add(ts);
+        }
     }
 }

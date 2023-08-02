@@ -12,6 +12,9 @@ import java.util.List;
 
 import algonquin.cst2335.cst2335_finalproject.R;
 
+/**
+ * Class for the Trivia Score adapter to work with the Recycler View for the Top 10 list.
+ */
 public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> {
 
     private List<TriviaScore> triviaScores;
