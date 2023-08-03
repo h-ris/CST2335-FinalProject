@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"algonquin.cst2335.cst2335_finalproject"},{"l":"algonquin.cst2335.cst2335_finalproject.databinding"},{"l":"All Packages","u":"allpackages-index.html"}];updateSearchResults();
+packageSearchIndex = [{"l":"algonquin.cst2335.cst2335_finalproject"},{"l":"algonquin.cst2335.cst2335_finalproject.databinding"},{"l":"algonquin.cst2335.trivia"},{"l":"All Packages","u":"allpackages-index.html"}];updateSearchResults();
