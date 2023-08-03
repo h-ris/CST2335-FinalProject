@@ -96,40 +96,45 @@ public class CcyConverterMainActivity extends AppCompatActivity {
         ccyToolbar = ccyBinding.ccyToolbar;
         ccyAddlist = ccyBinding.ccyAddlist;
 
+        // Create a ViewModel instance for managing data
         ccyViewModel = new ViewModelProvider(this).get(CcyViewModel.class);
         ccyItemList = ccyViewModel.ccyItemList.getValue();
 
 
-        // Add tool bar by calling onCreateOptionsMenu()
+        // Set up the tool bar
         setSupportActionBar(ccyToolbar);
 
-        // Populate dropdown list
+        // Populate the spinner dropdown list with currency units
         ArrayAdapter<CharSequence> ccyAdapter = ArrayAdapter.createFromResource(this, R.array.ccyList, android.R.layout.simple_spinner_item);
         ccyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerFromUnit.setAdapter(ccyAdapter);
         spinnerToUnit.setAdapter(ccyAdapter);
 
-        // Access the database:
+        // Access the database
         CcyDatabase db = Room.databaseBuilder(getApplicationContext(), CcyDatabase.class, "CurrencyConvertorDatabase").build();
         myDAO = db.getDAO();
 
+
+        // Check if the list of items is null and load data from the database
         if (ccyItemList == null) {
             ccyViewModel.ccyItemList.setValue(ccyItemList = new ArrayList<>());
 
-            // get all list item from database
+            // Fetch all list items from the database on a separate thread
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(()->{
                 List<CcyListItem> fromDatabase = myDAO.getAllCCYListItem();
                 ccyItemList.addAll(fromDatabase);
 
+                // Update the RecyclerView on the UI thread with the fetched data
                 runOnUiThread(()->{
                     ccyRecyclerView.setAdapter(myAdapter);
                 });
             });
         }
 
-        // Connect to Server
+        // Initialize Volley RequestQueue to connect to the server
         requestQueue = Volley.newRequestQueue(this);
+
 
         myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
@@ -237,11 +242,11 @@ public class CcyConverterMainActivity extends AppCompatActivity {
         makeToast("Added to Favourite List");
     });
 
-
+        // Set up the RecyclerView with the adapter and layout manager
         ccyRecyclerView.setAdapter(myAdapter);
         ccyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Observe method for fragments
+        // Observe for changes in the selected item in the ViewModel
         ccyViewModel.selectedCcyItem.observe(this,(newValue)->{
             CcyDetailsFragment ccyItemFragment = new CcyDetailsFragment(newValue);
             getSupportFragmentManager()

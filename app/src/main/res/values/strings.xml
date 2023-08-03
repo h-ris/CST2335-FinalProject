@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">CST2335_FinalProject</string>
-    <string name="ccy_convertBtn">Convert</string>
-
+    <string name="currency_converter_huixin">Currency Converter\n by Huixin Xu</string>
     <string name="bear_app_name">Bear Image Generator</string>
     <string name="width_edittext">Width</string>
     <string name="height_edittext">Height</string>
@@ -13,7 +12,6 @@
     <string name="trivia_question_andre">Trivia Question Database\n by Andre Azevedo</string>
     <string name="bear_image_daniel">Bear Image Generator\n by Daniel Stewart</string>
     <string name="flight_tracker_stefan">Aviation Stack Flight Tracker\n by Stefan Stivicic</string>
-    <string name="currency_converter_huixin">Currency Converter\n by Huixin Xu</string>
     <string name="welcome">Welcome to CST2335 Final Project</string>
     <string name="group">Warriors of The Endless Code</string>
     <string name="question_placeholder">This is a question place holder that is used by the Jedi order to emulate a really long question. Does it work tho?</string>
@@ -25,7 +23,13 @@
     <string name="user_name">User name</string>
     <string name="done">Done</string>
     <string name="sorry_no_score">Sorry, you\'re out of \nthe top 10!</string>
-  
+    <string name="ccy_enterAmt">Please enter amount: </string>
+    <string name="ccy_inputAmt">Enter amount here</string>
+    <string name="ccy_resultAmt">Result</string>
+    <string name="ccy_convertBtn">Convert</string>
+    <string name="ccy_from"></string>
+    <string name="ccy_to"></string>
+    <string name="ccy_date"></string>
     <string-array name="ccyList">
     <item>CAD - Canadian Dollar</item>
     <item>USD - US Dollar</item>
@@ -36,5 +40,6 @@
     <item>HKD - Hong Kong Dollar</item>
     <item>CNY - Chinese Yuan</item>
     </string-array>
+
 
 </resources>
