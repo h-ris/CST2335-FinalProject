@@ -38,6 +38,7 @@ public class SavedImagesActivity extends AppCompatActivity implements BearRecycl
         recyclerViewAdapter.setItemClickListener(this);
 
         databaseHelper = new BearImageDatabaseHelper(this);
+
         loadSavedImagesFromDatabase();
     }
 
