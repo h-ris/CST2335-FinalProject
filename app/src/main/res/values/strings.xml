@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">CST2335_FinalProject</string>
     <string name="currency_converter_huixin">Currency Converter\n by Huixin Xu</string>
-    <string name="bear_app_name">Bear Image Generator</string>
-    <string name="width_edittext">Width</string>
-    <string name="height_edittext">Height</string>
-    <string name="gen_button">Generate</string>
+
+
+<!--    //Andre Strings and Project Strings-->
     <string name="trivia_room">Trivia Room</string>
     <string name="trivia_top_10">Top 10</string>
     <string name="exit">Exit</string>
@@ -23,23 +22,32 @@
     <string name="user_name">User name</string>
     <string name="done">Done</string>
     <string name="sorry_no_score">Sorry, you\'re out of \nthe top 10!</string>
+
+<!--    //Ris Strings-->
+    <string name="ccy_convertBtn">Convert</string>
     <string name="ccy_enterAmt">Please enter amount: </string>
     <string name="ccy_inputAmt">Enter amount here</string>
     <string name="ccy_resultAmt">Result</string>
-    <string name="ccy_convertBtn">Convert</string>
     <string name="ccy_from"></string>
     <string name="ccy_to"></string>
     <string name="ccy_date"></string>
     <string-array name="ccyList">
-    <item>CAD - Canadian Dollar</item>
-    <item>USD - US Dollar</item>
-    <item>AUD - Australian Dollar</item>
-    <item>EUR - Euro</item>
-    <item>GBP - British Pound</item>
-    <item>JPY - Japanese Yen</item>
-    <item>HKD - Hong Kong Dollar</item>
-    <item>CNY - Chinese Yuan</item>
+        <item>CAD - Canadian Dollar</item>
+        <item>USD - US Dollar</item>
+        <item>AUD - Australian Dollar</item>
+        <item>EUR - Euro</item>
+        <item>GBP - British Pound</item>
+        <item>JPY - Japanese Yen</item>
+        <item>HKD - Hong Kong Dollar</item>
+        <item>CNY - Chinese Yuan</item>
     </string-array>
 
+
+<!--    //Daniel's Bear Gen Strings-->
+    <string name="bear_app_name">Bear Image Generator</string>
+    <string name="width_edittext">Width</string>
+    <string name="height_edittext">Height</string>
+    <string name="gen_button">Generate</string>
+    <string name="toolbar_title">Bear Image Generator</string>
 
 </resources>
