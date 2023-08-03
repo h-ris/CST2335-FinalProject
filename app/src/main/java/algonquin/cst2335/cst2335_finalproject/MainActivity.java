@@ -20,11 +20,14 @@ public class MainActivity extends AppCompatActivity {
             Intent toTriviaRoom = new Intent(this, TriviaRoomActivity.class);
             startActivity(toTriviaRoom);
         });
+
         //button for Bear Image Generator
-//        binding.button2.setOnClickListener(click -> {
-//
-//        });
-//
+        binding.buttonBear.setOnClickListener(click -> {
+            Intent toBearImageGen  = new Intent(this, BearImageMainActivity.class);
+            startActivity(toBearImageGen);
+
+        });
+
         //button for Aviation Stack Flight Tracker
 //        binding.button3.setOnClickListener(click -> {
 //
