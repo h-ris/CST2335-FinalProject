@@ -15,8 +15,6 @@
         android:theme="@style/Theme.CST2335_FinalProject"
         tools:targetApi="31">
 
-
-
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/gameLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TriviaRoomActivity">
+
+    <RelativeLayout
+        android:id="@+id/triviaHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/triviaTitle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:background="@color/navy"
+            android:text="@string/trivia_room"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="35sp"/>
+
+        <TextView
+            android:id="@+id/triviaTopTen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple"
+            android:text="@string/trivia_top_10"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_below="@+id/triviaTitle"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/top10List"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/triviaHeader"
+        android:layout_above="@id/btnTriviaStart"/>
+
+    <Button
+        android:id="@+id/btnTriviaStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/start"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
