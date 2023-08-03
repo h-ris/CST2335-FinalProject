@@ -1,76 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".CcyConverterMainActivity" >
+    tools:context=".CcyConverterMainActivity">
 
-    <EditText
-        android:id="@+id/amtTxt"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ccyToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="100dp"
-        android:hint="Amount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/destinationTxt" />
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.appcompat.widget.Toolbar>
 
-    <EditText
-        android:id="@+id/sourceTxt"
+    <FrameLayout
+        android:id="@+id/ccy_fragmentSection"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/amtTxt"
-        android:hint="Source Currency"
-        app:layout_constraintBottom_toTopOf="@+id/destinationTxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_height="0sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <EditText
-        android:id="@+id/destinationTxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sourceTxt"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="64dp"
-        android:hint="Destination Currency"
-        app:layout_constraintBottom_toTopOf="@+id/amtTxt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ccyToolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/convertBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/destinationTxt"
-        android:layout_marginBottom="100dp"
-        android:text="Convert"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amtTxt"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/resultAmt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/convertBtn"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="330dp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="#CBE6EA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/inputAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="130dp"
+                    android:text="Please enter amount:"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/ccyAmtTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="28dp"
+                    android:hint="Enter Amount"
+                    android:inputType="numberDecimal"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@+id/inputAmount"
+                    app:layout_constraintTop_toBottomOf="@+id/inputAmount" />
+
+                <TextView
+                    android:id="@+id/ccyResultAmt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="168dp"
+                    android:layout_marginTop="28dp"
+                    android:text="RESULT"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ccyAmtTxt" />
+
+                <Button
+                    android:id="@+id/ccyConvertButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="144dp"
+                    android:layout_marginBottom="10dp"
+                    android:minHeight="30dip"
+                    android:text="CONVERT"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ccyResultAmt"
+                    app:layout_constraintVertical_bias="0.746" />
+
+                <Spinner
+                    android:id="@+id/spinnerFromUnit"
+                    android:layout_width="150sp"
+                    android:layout_height="20sp"
+                    android:layout_marginStart="52dp"
+                    android:layout_marginTop="28dp"
+                    android:spinnerMode="dropdown"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ccyResultAmt" />
+
+                <Spinner
+                    android:id="@+id/spinnerToUnit"
+                    android:layout_width="150sp"
+                    android:layout_height="20sp"
+                    android:layout_marginStart="16dp"
+                    android:spinnerMode="dropdown"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/spinnerFromUnit"
+                    app:layout_constraintTop_toTopOf="@+id/spinnerFromUnit" />
+
+                <ImageView
+                    android:id="@+id/ccyAddlist"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="36dp"
+                    app:layout_constraintStart_toEndOf="@+id/ccyConvertButton"
+                    app:layout_constraintTop_toTopOf="@+id/ccyConvertButton"
+                    app:srcCompat="@drawable/baseline_task_alt_24" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ccyRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

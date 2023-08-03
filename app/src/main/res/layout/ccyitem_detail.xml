@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_secondary70">
+
+    <TextView
+        android:id="@+id/from_unit_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:text="From"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/from_unit_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="From Unit"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@+id/from_unit_label"
+        app:layout_constraintTop_toTopOf="@+id/from_unit_label"/>
+
+    <TextView
+        android:id="@+id/from_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="From Amount"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/from_unit_input"
+        app:layout_constraintTop_toBottomOf="@+id/from_unit_input"/>
+
+    <TextView
+        android:id="@+id/to_unit_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="To"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/from_unit_label"
+        app:layout_constraintTop_toBottomOf="@+id/from_amount"/>
+
+    <TextView
+        android:id="@+id/to_unit_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To Unit"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/from_amount"
+        app:layout_constraintTop_toTopOf="@+id/to_unit_label"/>
+
+    <TextView
+        android:id="@+id/to_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="To Amount"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/to_unit_input"
+        app:layout_constraintTop_toBottomOf="@+id/to_unit_input"/>
+
+    <TextView
+        android:id="@+id/time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Date:"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/to_unit_label"
+        app:layout_constraintTop_toBottomOf="@+id/to_amount"/>
+
+    <TextView
+        android:id="@+id/convertTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date goes here"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/to_amount"
+        app:layout_constraintTop_toTopOf="@+id/time_label"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
