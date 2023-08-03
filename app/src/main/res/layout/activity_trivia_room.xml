@@ -14,17 +14,35 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/triviaTitle"
+        <RelativeLayout
+            android:id="@+id/triviaMenu"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center"
-            android:layout_alignParentTop="true"
-            android:background="@color/navy"
-            android:text="@string/trivia_room"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="35sp"/>
+            android:layout_height="wrap_content"
+            android:background="@color/navy">
+
+            <TextView
+                android:id="@+id/triviaTitle"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:text="@string/trivia_room"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="35sp"/>
+
+            <ImageButton
+                android:id="@+id/btnTriviaInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_info_24"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/triviaTopTen"
@@ -35,7 +53,7 @@
             android:textSize="20sp"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:layout_below="@+id/triviaTitle"/>
+            android:layout_below="@+id/triviaMenu"/>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
