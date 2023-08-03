@@ -44,7 +44,7 @@ public class BearRecyclerViewAdapter extends RecyclerView.Adapter<BearRecyclerVi
     public BearRecyclerViewAdapter(Context context, ArrayList<String> urlList) {
         this.context = context;
         this.urlList = urlList;
-        databaseHelper = new BearImageDatabaseHelper(context);
+//        databaseHelper = new BearImageDatabaseHelper(context);
     }
 
     /**

@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -152,6 +153,7 @@ public class BearImageMainActivity extends AppCompatActivity {
         recyclerView.setAdapter(recyclerViewAdapter);
 
         databaseHelper = new BearImageDatabaseHelper(this);
+        databaseHelper.getWritableDatabase();
         loadSavedImagesFromDatabase();
 
         generateButton.setOnClickListener(clk -> {
@@ -169,6 +171,7 @@ public class BearImageMainActivity extends AppCompatActivity {
                 String url = "https://placebear.com/" + widthValue + "/" + heightValue + ".jpg";
                 stringArrayList.add(url);
                 recyclerViewAdapter.notifyDataSetChanged();
+
 
                 // Insert the image URL to the database
                 insertImageUrlToDatabase(url);
