@@ -4,8 +4,11 @@ package algonquin.cst2335.cst2335_finalproject;
 import static algonquin.cst2335.cst2335_finalproject.R.*;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -52,6 +56,8 @@ public class BearImageMainActivity extends AppCompatActivity {
     private ArrayList<String> stringArrayList;
     private BearRecyclerViewAdapter recyclerViewAdapter;
 
+    private static final int REQUEST_CODE_DISPLAY_IMAGE = 101;
+
 
     /**
      * OnCreate for Options menu
@@ -77,6 +83,9 @@ public class BearImageMainActivity extends AppCompatActivity {
         if (id == R.id.menu_help){
             showHelpDialog();
             return true;
+        }else if (id == R.id.menu_saved_images) {
+            openSavedImagesActivity();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -98,6 +107,23 @@ public class BearImageMainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
+    private BearImageDatabaseHelper databaseHelper;
+    private void loadSavedImagesFromDatabase() {
+        ArrayList<String> savedImageUrls = databaseHelper.getAllImageUrls();
+        stringArrayList.clear();
+        if (!savedImageUrls.isEmpty()) {
+            String lastSavedImageUrl = savedImageUrls.get(savedImageUrls.size() - 1);
+            stringArrayList.add(lastSavedImageUrl);
+        }
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    private void insertImageUrlToDatabase(String imageUrl) {
+        databaseHelper.insertImageUrl(imageUrl);
+    }
+
 
 
     /**
@@ -125,6 +151,9 @@ public class BearImageMainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerViewAdapter);
 
+        databaseHelper = new BearImageDatabaseHelper(this);
+        loadSavedImagesFromDatabase();
+
         generateButton.setOnClickListener(clk -> {
 
             String widthInput = width.getText().toString();
@@ -141,12 +170,47 @@ public class BearImageMainActivity extends AppCompatActivity {
                 stringArrayList.add(url);
                 recyclerViewAdapter.notifyDataSetChanged();
 
+                // Insert the image URL to the database
+                insertImageUrlToDatabase(url);
+
+                // Load the last saved image URL from the database after inserting
+                loadSavedImagesFromDatabase();
+
             }
 
 
         });
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d("MainActivity", "onActivityResult - RequestCode: " + requestCode + ", ResultCode: " + resultCode);
+
+        if (requestCode == REQUEST_CODE_DISPLAY_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            // Get the selected image URL from the SavedImagesActivity
+            String selectedImageUrl = data.getStringExtra("selectedImageUrl");
+
+            // Add the selected image URL to the RecyclerView
+            stringArrayList.clear();
+            stringArrayList.add(selectedImageUrl);
+            recyclerViewAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Close the database when the activity is destroyed
+        databaseHelper.close();
+    }
+
+    private void openSavedImagesActivity() {
+        Intent intent = new Intent(this, SavedImagesActivity.class);
+        startActivityForResult(intent,REQUEST_CODE_DISPLAY_IMAGE);
     }
 
 

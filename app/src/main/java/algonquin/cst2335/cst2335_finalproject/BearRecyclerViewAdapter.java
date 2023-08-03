@@ -27,6 +27,14 @@ public class BearRecyclerViewAdapter extends RecyclerView.Adapter<BearRecyclerVi
     // The list of image URLs to be displayed in the RecyclerView.
     private final ArrayList<String> urlList;
 
+    private BearImageDatabaseHelper databaseHelper;
+
+    public interface ItemClickListener {
+        void onItemClick(int position);
+    }
+
+    private ItemClickListener itemClickListener;
+
     /**
      * Constructor for the BearRecyclerViewAdapter class.
      *
@@ -36,6 +44,7 @@ public class BearRecyclerViewAdapter extends RecyclerView.Adapter<BearRecyclerVi
     public BearRecyclerViewAdapter(Context context, ArrayList<String> urlList) {
         this.context = context;
         this.urlList = urlList;
+        databaseHelper = new BearImageDatabaseHelper(context);
     }
 
     /**
@@ -50,7 +59,13 @@ public class BearRecyclerViewAdapter extends RecyclerView.Adapter<BearRecyclerVi
     public BearRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout for the individual item view and create a new ViewHolder.
         View view = LayoutInflater.from(context).inflate(R.layout.bear_image_view, parent, false);
-        return new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.itemView.setOnClickListener(v -> {
+            if (itemClickListener != null) {
+                itemClickListener.onItemClick(viewHolder.getAdapterPosition());
+            }
+        });
+        return viewHolder;
     }
 
     /**
@@ -95,4 +110,22 @@ public class BearRecyclerViewAdapter extends RecyclerView.Adapter<BearRecyclerVi
             bearImage = itemView.findViewById(R.id.bearImage);
         }
     }
+
+    public void updateData(ArrayList<String> urlList) {
+        this.urlList.clear();
+        this.urlList.addAll(urlList);
+        notifyDataSetChanged();
+    }
+
+    public void deleteItem(int position) {
+        String imageUrl = urlList.get(position);
+        urlList.remove(position);
+        notifyDataSetChanged();
+        databaseHelper.deleteImageUrl(imageUrl);
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
 }
