@@ -39,9 +39,9 @@ public class FlightRecyclerViewAdapter extends RecyclerView.Adapter<FlightRecycl
         holder.airportCode.setText(obj.getAirportCode());
         holder.dept.setText(obj.getDeparture());
         holder.status.setText(obj.getStatus());
-        holder.gate.setText(obj.getGate());
-        holder.terminal.setText(obj.getTerminal());
-        holder.delay.setText(String.format("%d", obj.getDelay()));
+        holder.gate.setText("Gate: " + obj.getGate());
+        holder.terminal.setText("Terminal: " + obj.getTerminal());
+        holder.delay.setText(String.format("%d min", obj.getDelay()));
         holder.destAirport.setText(obj.getDestination());
         holder.destAirportCode.setText(obj.getDestAirportCode());
     }

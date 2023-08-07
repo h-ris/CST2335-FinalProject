@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import algonquin.cst2335.cst2335_finalproject.databinding.FlightInfoBinding;
 
@@ -17,6 +21,7 @@ public class FlightDetailsFragment extends Fragment {
 
     FlightModel flight;
     Button saveFlight;
+    FlightModelDAO fmDAO;
 
     public FlightDetailsFragment(FlightModel flight){
         this.flight = flight;
@@ -25,6 +30,9 @@ public class FlightDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         super.onCreateView(inflater, container, savedInstanceState);
         FlightInfoBinding binding = FlightInfoBinding.inflate(inflater);
+
+        FlightDatabase db = Room.databaseBuilder(getActivity(), FlightDatabase.class, "SavedFlights").build();
+        fmDAO = db.fmDAO();
 
         binding.airportCode.setText(flight.getAirportCode());
         binding.destCode.setText(flight.getDestAirportCode());
@@ -36,7 +44,12 @@ public class FlightDetailsFragment extends Fragment {
         binding.destinationCity.setText(flight.getDestination());
 
         binding.saveFlightButton.setOnClickListener(click -> {
+            Executor thread = Executors.newSingleThreadExecutor();
 
+            thread.execute(() ->{
+                fmDAO.insertFlight(flight);//add to database;
+                /*this runs in another thread*/
+            });
             Toast toast = Toast.makeText(getActivity(), "Saved flight!", Toast.LENGTH_LONG);
             toast.show();
 

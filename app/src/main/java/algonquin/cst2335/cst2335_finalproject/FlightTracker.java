@@ -6,10 +6,16 @@ import androidx.dynamicanimation.animation.FlingAnimation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -42,6 +48,7 @@ public class FlightTracker extends AppCompatActivity implements FlightRecyclerVi
     RequestQueue queue = null;
     ArrayList<FlightModel> flightModels = new ArrayList<>();
     ArrayList<FlightModel> savedFlights = new ArrayList<>();
+    FlightModelDAO fmDAO;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,39 +57,56 @@ public class FlightTracker extends AppCompatActivity implements FlightRecyclerVi
         return true;
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.help){
+            AlertDialog.Builder builder = new AlertDialog.Builder(FlightTracker.this);
+            builder.setMessage("This is the help page!! I gotta edit this soon!")
+                    .setTitle("Flight Tracker Help")
+                    .setNeutralButton("Ok", (dialog, cl)->{})
+                    .create().show();
+        }
+        else if(item.getItemId() == R.id.savedFlights) {
+            Intent toSavedFlights = new Intent(this, SavedFlights.class);
+            startActivity(toSavedFlights);
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FlightDatabase db = Room.databaseBuilder(getApplicationContext(), FlightDatabase.class, "Saved_Flights").build();
-        FlightModelDAO fmDAO = db.fmDAO();
-
+        FlightDatabase db = Room.databaseBuilder(getApplicationContext(), FlightDatabase.class, "SavedFlights").build();
+        fmDAO = db.fmDAO();
         binding = FlightTrackerBinding.inflate(getLayoutInflater());
 
         queue = Volley.newRequestQueue(this);
         setContentView(R.layout.flight_tracker);
-
+        SharedPreferences prefs  = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         search = findViewById(R.id.search);
-       // saved = findViewById((R.id.saved));
         enterFlight = findViewById(R.id.enterFlight);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Flight Tracker");
         toolbar.showOverflowMenu();
 
+        String userAirportCode = prefs.getString("AirportCode", "");
+        enterFlight.setText(userAirportCode);
+
         //database??
-        if(savedFlights == null){
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(() ->{
-                savedFlights.addAll(fmDAO.getAllFlights());
-            });
-        }
+        Executor thread = Executors.newSingleThreadExecutor();
+        thread.execute(() ->{
+            savedFlights.addAll(fmDAO.getAllFlights());
+        });
+
 
         search.setOnClickListener(click ->{
             flightModels.clear();
             String airportCode = enterFlight.getText().toString();
             String url = "http://api.aviationstack.com/v1/flights?access_key=a0a7276cce38b003a8f87610bfb18012&dep_iata=" + URLEncoder.encode(airportCode);
-
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("AirportCode", enterFlight.getText().toString());
+            editor.apply();
             //Pull the data from the API with this JSON request
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                     (response) -> {
@@ -94,16 +118,27 @@ public class FlightTracker extends AppCompatActivity implements FlightRecyclerVi
                                 String status = thisObj.getString("flight_status");
 
                                 JSONObject dept = thisObj.getJSONObject("departure");
-                                String deptTime = "SMILE";
-                                String gate = "GATE";
-                                Integer delay = 0;
+                                String deptTime = dept.getString("estimated");
+                                String gate = dept.getString("gate");
+                                String delayString = dept.getString("delay");
 
                                 String terminal = dept.getString("terminal");
                                 JSONObject arrival = thisObj.getJSONObject("arrival");
                                 String destAirport = arrival.getString("airport");
                                 String destCode = arrival.getString("iata");
-                                flightModels.add(new FlightModel(airportCode, status, deptTime, gate, terminal, destAirport, destCode, delay));
+
+                                if (delayString != "null") {
+                                    int delay = Integer.parseInt(delayString);
+                                    flightModels.add(new FlightModel(airportCode, status, deptTime, gate, terminal, destAirport, destCode, delay));
+                                }
+                                else {
+                                    flightModels.add(new FlightModel(airportCode, status, deptTime, gate, terminal, destAirport, destCode, 0));
+                                }
+
                             }
+                            FlightRecyclerViewAdapter adapter = new FlightRecyclerViewAdapter(this, flightModels, this);
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -114,12 +149,9 @@ public class FlightTracker extends AppCompatActivity implements FlightRecyclerVi
                             int i = 0;
                     });
 
+
             queue.add(request);
 
-            FlightRecyclerViewAdapter adapter = new FlightRecyclerViewAdapter(this, flightModels, this);
-
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         });
 

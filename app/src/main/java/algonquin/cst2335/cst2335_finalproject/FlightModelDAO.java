@@ -10,7 +10,7 @@ import java.util.List;
 @Dao
 public interface FlightModelDAO {
     @Insert
-    void insertFlight(FlightModel f);
+    public void insertFlight(FlightModel f);
 
     @Query("SELECT * FROM FlightModel")
     List<FlightModel> getAllFlights();

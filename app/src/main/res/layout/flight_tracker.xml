@@ -66,5 +66,6 @@
             app:srcCompat="@drawable/baseline_search_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>
 </LinearLayout>
