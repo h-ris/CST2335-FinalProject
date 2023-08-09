@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CST2335_FinalProject</string>
+    <string name="app_name">WEC-Project</string>
     <string name="ccy_convertBtn">Converter</string>
     <string name="bear_app_name">Gerador de Imagem Urso</string>
     <string name="width_edittext">Comprimento</string>
@@ -36,8 +36,10 @@
     <string name="lang_info">Este aplicativo suporta as seguintes línguas:\n\n
                             - Inglês\n- Português (Brasil)</string>
     <string name="ok">OK</string>
+    <string name="delete_score">Deletar Placar</string>
+    <string name="delete_msg">Você tem certeza que quer deletar este placar?</string>
     <string name="yes">Sim</string>
-    <string name="no">Não</string>
+    <string name="cancel">Cancelar</string>
     <string name="trivia_instruc">Instruções</string>
     <string name="trivia_instruc_info">1 - Clique em Iniciar para começar uma nova rodada com 10 perguntas.\n\n\
                     2 - Leia cada pergunta, selecione uma resposta e click em Próxima para salvar sua resposta.\n\n
@@ -48,6 +50,10 @@
                     5 - E por último e mais importante de todos: \nSE DIVIRTA!</string>
     <string name="better_luck">Você consegue na próxima vez!</string>
     <string name="new_questions">Novas perguntas carregadas.</string>
+    <string name="delete">Apagar</string>
+    <string name="datePlaceholder">1999-12-12</string>
+    <string name="score_detail">Detalhe do Placar:</string>
+    <string name="rank_placeholder">10</string>
 
     <string-array name="ccyList">
         <item>CAD - Dolar Canadense</item>

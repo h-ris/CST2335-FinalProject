@@ -1,4 +1,4 @@
-package algonquin.cst2335.trivia;
+package algonquin.cst2335.cst2335_finalproject;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import algonquin.cst2335.cst2335_finalproject.R;
-
 /**
  * Class for the Trivia Score adapter to work with the Recycler View for the Top 10 list.
  */
 public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> {
 
-    private List<TriviaScore> triviaScores;
+    private final List<TriviaScore> triviaScores;
+    private final TriviaRoomViewModel tvModel;
 
-    public ScoreAdapter(List<TriviaScore> triviaScores) {
-        this.triviaScores = triviaScores;
+    public ScoreAdapter(TriviaRoomViewModel tvModel) {
+        this.tvModel = tvModel;
+        this.triviaScores = tvModel.playerScores.getValue();
     }
 
     @NonNull
@@ -28,14 +28,15 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
     public ScoreAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.top10_score_item, parent, false);
-        return new ViewHolder(listItem);
+        return new ViewHolder(listItem, tvModel);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ScoreAdapter.ViewHolder holder, int position) {
         final TriviaScore triviaScore = triviaScores.get(position);
-        holder.tvUsername.setText(triviaScore.getUserName());
+        holder.tvUsername.setText(triviaScore.getPlayerName());
         holder.tvUserScore.setText(triviaScore.getScoreString());
+        holder.tvUserRank.setText(String.valueOf(position + 1));
     }
 
     @Override
@@ -47,11 +48,22 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
 
         public TextView tvUsername;
         public TextView tvUserScore;
+        public TextView tvUserRank;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, TriviaRoomViewModel tvModel) {
             super(itemView);
-            this.tvUsername = (TextView) itemView.findViewById(R.id.userNameTop10);
-            this.tvUserScore = (TextView) itemView.findViewById(R.id.userScoreTop10);
+            this.tvUsername = itemView.findViewById(R.id.userNameTop10);
+            this.tvUserScore = itemView.findViewById(R.id.userScoreTop10);
+            this.tvUserRank = itemView.findViewById(R.id.userRank);
+
+            itemView.setOnClickListener(clk -> {
+                int position = getAbsoluteAdapterPosition();
+                TriviaScore selected = tvModel.playerScores.getValue().get(position);
+
+                if (selected != null) {
+                    tvModel.selectedScore.postValue(selected);
+                }
+            });
         }
     }
 }

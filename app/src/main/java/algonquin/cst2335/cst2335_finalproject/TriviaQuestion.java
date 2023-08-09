@@ -1,4 +1,4 @@
-package algonquin.cst2335.trivia;
+package algonquin.cst2335.cst2335_finalproject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
