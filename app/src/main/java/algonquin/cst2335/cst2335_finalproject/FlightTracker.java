@@ -60,7 +60,10 @@ public class FlightTracker extends AppCompatActivity implements FlightRecyclerVi
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.help){
             AlertDialog.Builder builder = new AlertDialog.Builder(FlightTracker.this);
-            builder.setMessage("This is the help page!! I gotta edit this soon!")
+            builder.setMessage("Enter a 3 letter airport code to get all the flights from that airport." +
+                            "Click a flight from the screen to view details about the flight, and to save " +
+                            "the flight. Click the saved flights icon in the menu bar in order to view your saved flights." +
+                            " You can click on a flight to bring up the option to delete the flight from your saved flights.")
                     .setTitle("Flight Tracker Help")
                     .setNeutralButton("Ok", (dialog, cl)->{})
                     .create().show();
