@@ -27,7 +27,7 @@
         android:text="@string/score_place_holder"/>
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/playerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/userScore"
@@ -35,14 +35,14 @@
         android:textSize="30sp"
         android:textAlignment="center"
         android:maxLength="20"
-        android:autofillHints="username"
+        android:autofillHints="playername"
         android:inputType="textCapSentences" />
 
     <TextView
         android:id="@+id/sorryScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/userName"
+        android:layout_below="@+id/playerName"
         android:text="@string/sorry_no_score"
         android:textAlignment="center"
         android:textSize="27sp"

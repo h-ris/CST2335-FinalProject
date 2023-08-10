@@ -1,16 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CST2335_FinalProject</string>
-    <string name="currency_converter_huixin">Currency Converter\n by Huixin Xu</string>
-
-
-<!--    //Andre Strings and Project Strings-->
+    <string name="app_name">WEC-Project</string>
     <string name="trivia_room">Trivia Room</string>
     <string name="trivia_top_10">Top 10</string>
     <string name="exit">Exit</string>
     <string name="start">Start</string>
-    <string name="trivia_question_andre">Trivia Question Database\n by Andre Azevedo</string>
-    <string name="bear_image_daniel">Bear Image Generator\n by Daniel Stewart</string>
-    <string name="flight_tracker_stefan">Aviation Stack Flight Tracker\n by Stefan Stivicic</string>
+    <string name="trivia_question_andre">Trivia Game</string>
+    <string name="bear_image_daniel">Bear Image Generator</string>
+    <string name="currency_converter_huixin">Currency Converter</string>
     <string name="welcome">Welcome to CST2335 Final Project</string>
     <string name="group">Warriors of The Endless Code</string>
     <string name="question_placeholder">This is a question place holder that is used by the Jedi order to emulate a really long question. Does it work tho?</string>
@@ -22,15 +19,37 @@
     <string name="user_name">User name</string>
     <string name="done">Done</string>
     <string name="sorry_no_score">Sorry, you\'re out of \nthe top 10!</string>
-
-<!--    //Ris Strings-->
     <string name="ccy_convertBtn">Convert</string>
-    <string name="ccy_enterAmt">Please enter amount: </string>
-    <string name="ccy_inputAmt">Enter amount here</string>
-    <string name="ccy_resultAmt">Result</string>
-    <string name="ccy_from"></string>
-    <string name="ccy_to"></string>
-    <string name="ccy_date"></string>
+    <string name="bear_app_name">Bear Image Generator</string>
+    <string name="width_edittext">Width</string>
+    <string name="height_edittext">Height</string>
+    <string name="gen_button">Generate</string>
+    <string name="toolbar_title">Bear Image Generator</string>
+    <string name="flight_tracker_stefan">Aviation Stack Flight Tracker</string>
+    <string name="credits">Credits</string>
+    <string name="credits_info">Final Project for the Course CST2335 Mobile Application Programming. \
+                    The Project includes an Aviation Flight Tracker by Stefan Stivicic, a Bear Image \
+                    Generator by Daniel Stewart, a Currency Converter by Huixin Xu, and a Trivia Game
+                    by Andre Azevedo.\n\nFor questions or comments please email: azev0015@algonquinlive.com</string>
+    <string name="languages">Languages</string>
+    <string name="lang_info">This app is supported in the following languages:\n\n     \
+                        - English\n    - Portuguese (Brazil)</string>
+    <string name="ok">OK</string>
+    <string name="delete_score">Delete Score</string>
+    <string name="delete_msg">Are you sure you would like to delete the current score?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="trivia_instruc">Instructions</string>
+    <string name="trivia_instruc_info">1 - Press the Start button to start a new game round with 10 questions.\n\n
+                    2 - Read each question and select an answer and press Next to save your answer.\n\n
+                    3 - After 10 questions you will see your current score. If you have a score for the
+                    Top 10 board you will be asked to type your username.\n\n
+                    4 - Enter a username and click done if you want to be on the Top 10 list or
+                    leave the field blank if you don\'t.\n\n
+                    5 - Lastly but most importantly: HAVE FUN!</string>
+    <string name="better_luck">Better luck next time!</string>
+    <string name="new_questions">New questions loaded.</string>
+
     <string-array name="ccyList">
         <item>CAD - Canadian Dollar</item>
         <item>USD - US Dollar</item>
@@ -41,13 +60,8 @@
         <item>HKD - Hong Kong Dollar</item>
         <item>CNY - Chinese Yuan</item>
     </string-array>
-
-
-<!--    //Daniel's Bear Gen Strings-->
-    <string name="bear_app_name">Bear Image Generator</string>
-    <string name="width_edittext">Width</string>
-    <string name="height_edittext">Height</string>
-    <string name="gen_button">Generate</string>
-    <string name="toolbar_title">Bear Image Generator</string>
-
+    <string name="delete">Delete</string>
+    <string name="datePlaceholder">1999-12-12</string>
+    <string name="score_detail">Score Detail</string>
+    <string name="rank_placeholder">10</string>
 </resources>

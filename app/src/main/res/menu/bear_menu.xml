@@ -3,11 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_help"
-        android:title="help"
+        android:title="Instructions"
         android:orderInCategory="100"
         app:showAsAction="never"/>
     <item
         android:id="@+id/menu_saved_images"
         android:title="Saved Images" />
+    <item
+        android:id="@+id/menu_show_welcome"
+        android:title="Welcome Message" />
 
 </menu>

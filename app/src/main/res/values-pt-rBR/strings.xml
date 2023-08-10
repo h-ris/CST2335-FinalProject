@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WEC-Project</string>
+    <string name="ccy_convertBtn">Converter</string>
+    <string name="bear_app_name">Gerador de Imagem Urso</string>
+    <string name="width_edittext">Comprimento</string>
+    <string name="height_edittext">Altura</string>
+    <string name="gen_button">Gerar</string>
+    <string name="trivia_room">Sala de Trivia</string>
+    <string name="trivia_top_10">Top 10</string>
+    <string name="exit">Sair</string>
+    <string name="start">Iniciar</string>
+    <string name="trivia_question_andre">Sala de Trivia</string>
+    <string name="bear_image_daniel">Gerador de Imagem de Ursos</string>
+    <string name="toolbar_title">Gerador de Imagem de Ursos</string>
+    <string name="flight_tracker_stefan">Rastreador de Vôos</string>
+    <string name="currency_converter_huixin">Conversor de Moedas</string>
+    <string name="welcome">Bem Vindo ao Projeto Final CST2335</string>
+    <string name="group">Warriors of The Endless Code</string>
+    <string name="question_placeholder">This is a question place holder that is used by the Jedi order to emulate a really long question. Does it work tho?</string>
+    <string name="optionplaceholder">This is one option!</string>
+    <string name="longanswer">This is a very long option placeholder for a answer as long as the world!</string>
+    <string name="next">Próxima</string>
+    <string name="your_score">Seu Placar:</string>
+    <string name="score_place_holder">100</string>
+    <string name="user_name">Usuário</string>
+    <string name="done">Fim</string>
+    <string name="sorry_no_score">Que pena, você não chegou no Top 10!</string>
+    <string name="credits">Crédito</string>
+    <string name="credits_info">Project Final do curso CST2335 Programação de Aplicativos Móveis.
+                                O projeto inclui um Rastreador de Vôo por Stefan Stivicic, um Gerador de imagem
+                                de Ursos por Daniel Stewart, um Conversor de Moedas por Huixin Xu, e um jogo de Trivia
+                                por Andre Azevedo.\n\nPara perguntas ou comentários mandar email para:
+                                azev0015@algonquinlive.com</string>
+    <string name="languages">Linguagens</string>
+    <string name="lang_info">Este aplicativo suporta as seguintes línguas:\n\n
+                            - Inglês\n- Português (Brasil)</string>
+    <string name="ok">OK</string>
+    <string name="delete_score">Deletar Placar</string>
+    <string name="delete_msg">Você tem certeza que quer deletar este placar?</string>
+    <string name="yes">Sim</string>
+    <string name="cancel">Cancelar</string>
+    <string name="trivia_instruc">Instruções</string>
+    <string name="trivia_instruc_info">1 - Clique em Iniciar para começar uma nova rodada com 10 perguntas.\n\n\
+                    2 - Leia cada pergunta, selecione uma resposta e click em Próxima para salvar sua resposta.\n\n
+                    3 - Depois de 10 perguntas seu placar vai estar na tela. Se você conseguir um placar
+                    para o Top 10 você poderá escrever seu nome.\n\n
+                    4 - Escreva seu nome e clique Fim se você quer estar na lista Top 10 ou
+                    deixe o campo em branco se não quiser.\n\n
+                    5 - E por último e mais importante de todos: \nSE DIVIRTA!</string>
+    <string name="better_luck">Você consegue na próxima vez!</string>
+    <string name="new_questions">Novas perguntas carregadas.</string>
+    <string name="delete">Apagar</string>
+    <string name="datePlaceholder">1999-12-12</string>
+    <string name="score_detail">Detalhe do Placar:</string>
+    <string name="rank_placeholder">10</string>
+
+    <string-array name="ccyList">
+        <item>CAD - Dolar Canadense</item>
+        <item>USD - Dolar USA</item>
+        <item>AUD - Dolar Australiano</item>
+        <item>EUR - Euro</item>
+        <item>GBP - Libra Britânica</item>
+        <item>JPY - Yen Japonês</item>
+        <item>HKD - Dolar de Hong Kong</item>
+        <item>CNY - Yuan Chinês</item>
+    </string-array>
+</resources>

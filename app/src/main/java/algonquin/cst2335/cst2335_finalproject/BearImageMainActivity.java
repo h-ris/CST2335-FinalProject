@@ -7,6 +7,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -58,6 +60,10 @@ public class BearImageMainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_DISPLAY_IMAGE = 101;
 
+    private static final String PREF_WELCOME_SHOWN = "welcomeShown";
+    private static final String PREFS_NAME = "MyPrefs";
+    private SharedPreferences sharedPreferences;
+
 
     /**
      * OnCreate for Options menu
@@ -85,6 +91,9 @@ public class BearImageMainActivity extends AppCompatActivity {
             return true;
         }else if (id == R.id.menu_saved_images) {
             openSavedImagesActivity();
+            return true;
+        }else if (id == R.id.menu_show_welcome) {
+            openWelcomeFragment();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -136,7 +145,19 @@ public class BearImageMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.bearimagegenerator_main);
+        setContentView(R.layout.bearimagegenerator_main);
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean isFirstLaunch = sharedPreferences.getBoolean(PREF_WELCOME_SHOWN, true);
+
+        if (isFirstLaunch) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(android.R.id.content, new BearImageDetailsFragment())
+                    .commit();
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(PREF_WELCOME_SHOWN, false);
+            editor.apply();
+        }
 
         toolbar = findViewById(id.toolbar);
         width = findViewById(id.width);
@@ -152,6 +173,7 @@ public class BearImageMainActivity extends AppCompatActivity {
         recyclerView.setAdapter(recyclerViewAdapter);
 
         databaseHelper = new BearImageDatabaseHelper(this);
+        databaseHelper.getWritableDatabase();
         loadSavedImagesFromDatabase();
 
         generateButton.setOnClickListener(clk -> {
@@ -169,6 +191,7 @@ public class BearImageMainActivity extends AppCompatActivity {
                 String url = "https://placebear.com/" + widthValue + "/" + heightValue + ".jpg";
                 stringArrayList.add(url);
                 recyclerViewAdapter.notifyDataSetChanged();
+
 
                 // Insert the image URL to the database
                 insertImageUrlToDatabase(url);
@@ -211,6 +234,17 @@ public class BearImageMainActivity extends AppCompatActivity {
     private void openSavedImagesActivity() {
         Intent intent = new Intent(this, SavedImagesActivity.class);
         startActivityForResult(intent,REQUEST_CODE_DISPLAY_IMAGE);
+    }
+
+    private void openWelcomeFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new BearImageDetailsFragment())
+                .commit();
+
+        // Reset the flag in shared preferences to show the welcome fragment again
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(PREF_WELCOME_SHOWN, true);
+        editor.apply();
     }
 
 

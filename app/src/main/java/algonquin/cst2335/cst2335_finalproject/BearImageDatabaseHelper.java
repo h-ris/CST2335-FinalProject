@@ -40,7 +40,7 @@ public class BearImageDatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_IMAGE_URL, imageUrl);
         db.insert(TABLE_NAME, null, values);
-        db.close();
+
     }
 
     public ArrayList<String> getAllImageUrls() {
@@ -63,7 +63,7 @@ public class BearImageDatabaseHelper extends SQLiteOpenHelper {
                 cursor.close();
             }
         }
-        db.close();
+
         return urlList;
     }
 
@@ -71,6 +71,6 @@ public class BearImageDatabaseHelper extends SQLiteOpenHelper {
     public void deleteImageUrl(String imageUrl) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COLUMN_IMAGE_URL + "=?", new String[]{imageUrl});
-        db.close();
+
     }
 }

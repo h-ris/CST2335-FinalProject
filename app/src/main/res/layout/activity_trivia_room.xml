@@ -12,7 +12,8 @@
         android:id="@+id/triviaHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/navy">
 
         <TextView
             android:id="@+id/triviaTitle"
@@ -20,36 +21,66 @@
             android:layout_height="60dp"
             android:gravity="center"
             android:layout_alignParentTop="true"
-            android:background="@color/navy"
             android:text="@string/trivia_room"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="35sp"/>
+            android:textSize="35sp"
+            android:fontFamily="sans-serif-medium"/>
 
-        <TextView
-            android:id="@+id/triviaTopTen"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/btnTriviaInfo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/purple"
-            android:text="@string/trivia_top_10"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:layout_below="@+id/triviaTitle"/>
+            android:src="@drawable/baseline_info_24"
+            android:minHeight="48dp"
+            android:minWidth="48dp"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+            />
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/top10List"
+    <FrameLayout
+        android:id="@+id/triviaFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/triviaHeader"
-        android:layout_above="@id/btnTriviaStart"/>
+        android:layout_below="@+id/triviaHeader">
 
-    <Button
-        android:id="@+id/btnTriviaStart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/start"
-        android:layout_alignParentBottom="true"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/triviaTopTen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/purple"
+                android:text="@string/trivia_top_10"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textColor="@color/white"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/top10List"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/triviaTopTen"
+                android:layout_above="@id/btnTriviaStart"
+                />
+
+            <Button
+                android:id="@+id/btnTriviaStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/start"
+                android:textSize="24sp"/>
+        </RelativeLayout>
+    </FrameLayout>
+
 </RelativeLayout>
