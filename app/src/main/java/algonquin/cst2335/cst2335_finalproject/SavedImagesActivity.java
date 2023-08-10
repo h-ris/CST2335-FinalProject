@@ -2,14 +2,18 @@ package algonquin.cst2335.cst2335_finalproject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.toolbox.ImageRequest;
 
 import java.util.ArrayList;
 
@@ -60,18 +64,40 @@ public class SavedImagesActivity extends AppCompatActivity implements BearRecycl
         Log.d("SavedImagesActivity", "Item clicked at position: " + position);
         String imageUrl = savedImageUrls.get(position);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Options");
-        builder.setItems(new CharSequence[]{"Delete", "Display Image"}, (dialog, which) -> {
-            if (which == 0) {
-                // Delete option selected
-                deleteImage(position);
-            } else if (which == 1) {
-                // Display Image option selected
-                displayImage(imageUrl);
-            }
-        });
-        builder.show();
+        BearImageVolleySingleton volleySingleton = BearImageVolleySingleton.getInstance(this);
+
+        ImageRequest imageRequest = new ImageRequest(imageUrl,
+                response -> {
+                    Bitmap imageBitmap = response;
+                    int width = imageBitmap.getWidth();
+                    int height = imageBitmap.getHeight();
+
+                    // Create the title with dimensions
+                    String title = "Image Dimensions: " + width + "x" + height;
+
+                    // Create the AlertDialog with options
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle(title);
+                    builder.setItems(new CharSequence[]{"Delete", "Display Image"}, (dialog, which) -> {
+                        if (which == 0) {
+                            // Delete option selected
+                            deleteImage(position);
+                        } else if (which == 1) {
+                            // Display Image option selected
+                            displayImage(imageUrl);
+                        }
+                    });
+
+                    builder.setPositiveButton("Cancel", (dialog, which) -> dialog.dismiss());
+                    builder.show();
+                }, 0, 0, ImageView.ScaleType.CENTER_INSIDE, null,
+                error -> {
+                    // Handle error loading image
+                    Log.e("SavedImagesActivity", "Error loading image: " + error.getMessage());
+                });
+
+        // Add the image request to the Volley request queue
+        volleySingleton.addToRequestQueue(imageRequest);
     }
 
     private void deleteImage(int position) {
