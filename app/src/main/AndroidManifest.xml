@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST2335_FinalProject"
         tools:targetApi="31">
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -24,6 +25,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".FlightTracker"
+            android:exported="true">
+
+        </activity>
 
         <activity
             android:name=".CcyConverterMainActivity"
@@ -43,6 +49,12 @@
             android:label="Saved Images">
         </activity>
 
+        <activity
+            android:name=".SavedFlights"
+            android:exported="false"
+            >
+
+        </activity>
 
     </application>
 

@@ -41,9 +41,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //button for Aviation Stack Flight Tracker
-//        binding.button3.setOnClickListener(click -> {
-//
-//        });
+        binding.buttonFlight.setOnClickListener(click -> {
+            Intent toFlightTracker = new Intent(this, FlightTracker.class);
+            startActivity(toFlightTracker);
+        });
 
         //button for Currency Converter
         binding.buttonCurrency.setOnClickListener(click -> {
