@@ -1,3 +1,0 @@
-2 - Can we set all export properties in the AndroidManifest to False? Only mine is set to false.
-    Can the MainActivity export property be set to false?
-- Right click project folder, Open module settings - set to API 33, should it be 33?ls

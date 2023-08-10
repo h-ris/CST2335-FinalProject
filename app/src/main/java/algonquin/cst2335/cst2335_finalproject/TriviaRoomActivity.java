@@ -67,7 +67,7 @@ public class TriviaRoomActivity extends AppCompatActivity {
     private EditText etPlayerName;
     private TextView tvNoScore;
     private List<TriviaScore> top10;
-    private ScoreAdapter adapter;
+    private TriviaScoreAdapter adapter;
     private TriviaDatabase triviaDatabase;
     private SharedPreferences sp;
     private String savedPlayerName;
@@ -94,7 +94,7 @@ public class TriviaRoomActivity extends AppCompatActivity {
         buildGameDialog();
         buildScoreDialog();
 
-        adapter = new ScoreAdapter(tvModel);
+        adapter = new TriviaScoreAdapter(tvModel);
         binding.top10List.setHasFixedSize(true);
         binding.top10List.setLayoutManager(new LinearLayoutManager(this));
         binding.top10List.setAdapter(adapter);

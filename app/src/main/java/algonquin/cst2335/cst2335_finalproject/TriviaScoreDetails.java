@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,7 @@ public class TriviaScoreDetails extends Fragment {
 
     private static TriviaScoreDetails fragment;
     private TriviaRoomViewModel tvModel;
-    private ScoreAdapter adapter;
+    private TriviaScoreAdapter adapter;
     private TriviaDatabase tvDB;
 
     /**
@@ -30,7 +29,7 @@ public class TriviaScoreDetails extends Fragment {
      *
      * @param tvModel The TriviaRoomViewModel with the scores information.
      */
-    private TriviaScoreDetails(TriviaRoomViewModel tvModel, ScoreAdapter adapter, TriviaDatabase tvDB) {
+    private TriviaScoreDetails(TriviaRoomViewModel tvModel, TriviaScoreAdapter adapter, TriviaDatabase tvDB) {
         this.tvModel = tvModel;
         this.adapter = adapter;
         this.tvDB = tvDB;
@@ -43,7 +42,7 @@ public class TriviaScoreDetails extends Fragment {
      * @param tvModel The TriviaRoomViewModel with the score information to be loaded.
      * @return A new instance of fragment TriviaScoreDetails.
      */
-    public static TriviaScoreDetails newInstance(TriviaRoomViewModel tvModel, ScoreAdapter adapter, TriviaDatabase tvDB) {
+    public static TriviaScoreDetails newInstance(TriviaRoomViewModel tvModel, TriviaScoreAdapter adapter, TriviaDatabase tvDB) {
         if (fragment == null) {
             fragment = new TriviaScoreDetails(tvModel, adapter, tvDB);
         }
@@ -52,6 +51,7 @@ public class TriviaScoreDetails extends Fragment {
 
     /**
      * onCreateView method for the score details fragment that creates the fragment
+     *
      * @param inflater The LayoutInflater object that can be used to inflate
      * any views in the fragment,
      * @param container If non-null, this is the parent view that the fragment's
@@ -60,7 +60,7 @@ public class TriviaScoreDetails extends Fragment {
      * @param savedInstanceState If non-null, this fragment is being re-constructed
      * from a previous saved state as given here.
      *
-     * @return
+     * @return The layout where the fragment will be set.
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

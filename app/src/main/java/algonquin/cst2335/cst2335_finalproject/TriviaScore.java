@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
+/**
+ * A class representing a trivia score, which includes the player's name, the score value,
+ * and the date when the score was achieved.
+ * This class also implements the Comparator interface to allow for score-based comparison.
+ */
 public class TriviaScore implements Comparator<TriviaScore> {
 
     private int id;
@@ -11,8 +16,20 @@ public class TriviaScore implements Comparator<TriviaScore> {
     private int score;
     private LocalDate gameDate;
 
+    /**
+     * Default constructor for TriviaScore.
+     * Creates an empty TriviaScore object with default values.
+     */
     public TriviaScore() {}
 
+    /**
+     * Constructor for TriviaScore with specified values.
+     *
+     * @param id         The unique identifier for the score.
+     * @param playerName The name of the player.
+     * @param score      The player's score.
+     * @param gameDate   The date when the score was achieved as a string (in "yyyy-MM-dd" format).
+     */
     public TriviaScore(int id, String playerName, int score, String gameDate) {
         this.id = id;
         this.playerName = playerName;
@@ -24,6 +41,7 @@ public class TriviaScore implements Comparator<TriviaScore> {
         }
     }
 
+    // Getters and setters for class properties...
     public int getId() {
         return id;
     }
@@ -60,10 +78,20 @@ public class TriviaScore implements Comparator<TriviaScore> {
         return score + "";
     }
 
+    /**
+     * Add a score to the current score value.
+     *
+     * @param score The score to be added.
+     */
     public void addScore(int score) {
         this.score = this.score + score;
     }
 
+    /**
+     * Get the formatted game date string (in "MMM dd, yyyy" format).
+     *
+     * @return The formatted game date string.
+     */
     public String getGameDateString() {
         String dateString = gameDate.toString();
 
@@ -74,6 +102,14 @@ public class TriviaScore implements Comparator<TriviaScore> {
         return dateString;
     }
 
+    /**
+     * Compare two TriviaScore objects based on their scores.
+     *
+     * @param t1 The first TriviaScore object.
+     * @param t2 The second TriviaScore object.
+     * @return A negative integer, zero, or a positive integer as the first score is less than,
+     *         equal to, or greater than the second score.
+     */
     @Override
     public int compare(TriviaScore t1, TriviaScore t2) {
         return t2.getScore() - t1.getScore();
