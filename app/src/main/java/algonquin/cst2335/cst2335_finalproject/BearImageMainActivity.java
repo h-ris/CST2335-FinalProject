@@ -42,12 +42,15 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.cst2335_finalproject.databinding.BearImageViewBinding;
 import algonquin.cst2335.cst2335_finalproject.databinding.BearimagegeneratorMainBinding;
 
-
+/**
+ * The main activity class for the Bear Image Generator application. This class handles user interactions
+ * and manages the UI components for generating and displaying bear images.
+ * @author Daniel Stewart
+ * @version 1.0
+ */
 public class BearImageMainActivity extends AppCompatActivity {
 
-    BearimagegeneratorMainBinding binding;
-    BearImageViewBinding imageBinding;
-
+    // Variables for UI components
     Toolbar toolbar;
     EditText width;
     EditText height;
@@ -58,18 +61,20 @@ public class BearImageMainActivity extends AppCompatActivity {
     private ArrayList<String> stringArrayList;
     private BearRecyclerViewAdapter recyclerViewAdapter;
 
+    // Request code for startActivityForResult
     private static final int REQUEST_CODE_DISPLAY_IMAGE = 101;
 
+    // Shared preferences keys
     private static final String PREF_WELCOME_SHOWN = "welcomeShown";
     private static final String PREFS_NAME = "MyPrefs";
     private SharedPreferences sharedPreferences;
 
 
     /**
-     * OnCreate for Options menu
-     * @param menu The options menu in which you place your items.
+     * Called to create the options menu in the activity's action bar.
      *
-     * @return
+     * @param menu The options menu in which you place your items.
+     * @return Returns true for the menu to be displayed, false otherwise.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -78,10 +83,10 @@ public class BearImageMainActivity extends AppCompatActivity {
     }
 
     /**
-     * Finds out when an item is selected
-     * @param item The menu item that was selected.
+     * Called when a menu item is selected.
      *
-     * @return
+     * @param item The menu item that was selected.
+     * @return Returns true to consume the event here or false to allow normal menu processing to proceed.
      */
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -100,7 +105,7 @@ public class BearImageMainActivity extends AppCompatActivity {
     }
 
     /**
-     * AlertDialog for when help menu option is selected
+     * Called to create and show an AlertDialog for displaying help instructions.
      */
     private void showHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -136,11 +141,10 @@ public class BearImageMainActivity extends AppCompatActivity {
 
 
     /**
-     * OnCreate method for main activity
-     * @param savedInstanceState If the activity is being re-initialized after
-     *     previously being shut down then this Bundle contains the data it most
-     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     * Called when the activity is being created. Initializes UI components and handles user interactions.
      *
+     * @param savedInstanceState If the activity is being re-initialized after being shut down then this Bundle contains the data it most recently supplied
+     *                           in {@link #onSaveInstanceState}. Otherwise, it is null.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +163,7 @@ public class BearImageMainActivity extends AppCompatActivity {
             editor.apply();
         }
 
+        // Initialize UI components
         toolbar = findViewById(id.toolbar);
         width = findViewById(id.width);
         height = findViewById(id.height);
@@ -172,10 +177,12 @@ public class BearImageMainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerViewAdapter);
 
+        // Initialize database helper and load saved images
         databaseHelper = new BearImageDatabaseHelper(this);
         databaseHelper.getWritableDatabase();
         loadSavedImagesFromDatabase();
 
+        // Set click listener for the generate button
         generateButton.setOnClickListener(clk -> {
 
             String widthInput = width.getText().toString();
@@ -207,12 +214,21 @@ public class BearImageMainActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Called when the activity returns a result from another activity started by startActivityForResult.
+     *
+     * @param requestCode The request code passed to startActivityForResult.
+     * @param resultCode The result code returned by the child activity.
+     * @param data The intent that carries the result data.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         Log.d("MainActivity", "onActivityResult - RequestCode: " + requestCode + ", ResultCode: " + resultCode);
 
+        // Handle the result data
         if (requestCode == REQUEST_CODE_DISPLAY_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
             // Get the selected image URL from the SavedImagesActivity
             String selectedImageUrl = data.getStringExtra("selectedImageUrl");
@@ -224,6 +240,9 @@ public class BearImageMainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called when the activity is being destroyed. Closes the database connection.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -231,12 +250,22 @@ public class BearImageMainActivity extends AppCompatActivity {
         databaseHelper.close();
     }
 
+    /**
+     * Opens the SavedImagesActivity to display a list of saved bear image URLs.
+     */
     private void openSavedImagesActivity() {
+        // Create an intent to start the SavedImagesActivity
         Intent intent = new Intent(this, SavedImagesActivity.class);
-        startActivityForResult(intent,REQUEST_CODE_DISPLAY_IMAGE);
+        // Start the activity and expect a result from it
+        startActivityForResult(intent, REQUEST_CODE_DISPLAY_IMAGE);
     }
 
+    /**
+     * Opens the BearImageDetailsFragment to display a welcome message.
+     * Resets the "welcome shown" flag in shared preferences after displaying the fragment.
+     */
     private void openWelcomeFragment() {
+        // Replace the content view with the BearImageDetailsFragment
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new BearImageDetailsFragment())
                 .commit();
@@ -246,6 +275,7 @@ public class BearImageMainActivity extends AppCompatActivity {
         editor.putBoolean(PREF_WELCOME_SHOWN, true);
         editor.apply();
     }
+
 
 
 }

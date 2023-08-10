@@ -111,12 +111,22 @@ public class BearRecyclerViewAdapter extends RecyclerView.Adapter<BearRecyclerVi
         }
     }
 
+    /**
+     * Updates the data of the RecyclerView adapter with the provided list of image URLs.
+     *
+     * @param urlList The ArrayList of image URLs to update the adapter's data with.
+     */
     public void updateData(ArrayList<String> urlList) {
         this.urlList.clear();
         this.urlList.addAll(urlList);
         notifyDataSetChanged();
     }
 
+    /**
+     * Deletes an item from the adapter's data and the associated database entry.
+     *
+     * @param position The position of the item to be deleted.
+     */
     public void deleteItem(int position) {
         String imageUrl = urlList.get(position);
         urlList.remove(position);
@@ -124,8 +134,14 @@ public class BearRecyclerViewAdapter extends RecyclerView.Adapter<BearRecyclerVi
         databaseHelper.deleteImageUrl(imageUrl);
     }
 
+    /**
+     * Sets a listener for item click events in the RecyclerView items.
+     *
+     * @param itemClickListener The ItemClickListener to be set for handling item click events.
+     */
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
+
 
 }

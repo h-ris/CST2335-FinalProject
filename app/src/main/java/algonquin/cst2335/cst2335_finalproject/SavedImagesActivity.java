@@ -17,6 +17,12 @@ import com.android.volley.toolbox.ImageRequest;
 
 import java.util.ArrayList;
 
+/**
+ * The activity class responsible for displaying saved bear image URLs. This class handles displaying
+ * the list of saved images, item click events, and options for deleting or displaying images.
+ * @author Daniel Stewart
+ * @version 1.0
+ */
 public class SavedImagesActivity extends AppCompatActivity implements BearRecyclerViewAdapter.ItemClickListener {
 
     private RecyclerView recyclerView;
@@ -24,6 +30,11 @@ public class SavedImagesActivity extends AppCompatActivity implements BearRecycl
     private BearRecyclerViewAdapter recyclerViewAdapter;
     private BearImageDatabaseHelper databaseHelper;
 
+    /**
+     * Called when the activity is being created. Initializes UI components and handles loading saved images from the database.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after being shut down then this Bundle contains the data it most recently supplied in {@link #onSaveInstanceState}. Otherwise, it is null.
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +57,17 @@ public class SavedImagesActivity extends AppCompatActivity implements BearRecycl
         loadSavedImagesFromDatabase();
     }
 
-
+    /**
+     * Loads saved bear image URLs from the database and updates the RecyclerView adapter's data.
+     */
     private void loadSavedImagesFromDatabase() {
         ArrayList<String> savedImageUrls = databaseHelper.getAllImageUrls();
         recyclerViewAdapter.updateData(savedImageUrls);
     }
 
+    /**
+     * Called when the activity is being destroyed. Closes the database connection.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -59,6 +75,11 @@ public class SavedImagesActivity extends AppCompatActivity implements BearRecycl
         databaseHelper.close();
     }
 
+    /**
+     * Handles item click events in the RecyclerView. Displays options for deleting or displaying images.
+     *
+     * @param position The position of the clicked item in the RecyclerView.
+     */
     @Override
     public void onItemClick(int position) {
         Log.d("SavedImagesActivity", "Item clicked at position: " + position);
@@ -100,6 +121,11 @@ public class SavedImagesActivity extends AppCompatActivity implements BearRecycl
         volleySingleton.addToRequestQueue(imageRequest);
     }
 
+    /**
+     * Deletes a saved image at the specified position from the database and the RecyclerView.
+     *
+     * @param position The position of the image to be deleted.
+     */
     private void deleteImage(int position) {
         String imageUrl = savedImageUrls.get(position);
         databaseHelper.deleteImageUrl(imageUrl);
@@ -107,6 +133,11 @@ public class SavedImagesActivity extends AppCompatActivity implements BearRecycl
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Displays the selected image and returns to the MainActivity with the selected image URL.
+     *
+     * @param imageUrl The URL of the selected image.
+     */
     private void displayImage(String imageUrl) {
         // Navigate back to MainActivity and display the selected image
         Intent intent = new Intent();
