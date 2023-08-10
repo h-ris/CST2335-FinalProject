@@ -50,6 +50,9 @@
     <string name="better_luck">Better luck next time!</string>
     <string name="new_questions">New questions loaded.</string>
 
+    <string name="ccy_enterAmt">Please input the amount: </string>
+    <string name="ccy_inputAmt">Input goes here: </string>
+    <string name="ccy_resultAmt">Result</string>
     <string-array name="ccyList">
         <item>CAD - Canadian Dollar</item>
         <item>USD - US Dollar</item>

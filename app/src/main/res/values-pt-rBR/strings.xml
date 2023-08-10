@@ -65,4 +65,7 @@
         <item>HKD - Dolar de Hong Kong</item>
         <item>CNY - Yuan Chinês</item>
     </string-array>
+    <string name="ccy_enterAmt">" Por favor, insira o valor:"</string>
+    <string name="ccy_inputAmt">entrada vai aqui:</string>
+    <string name="ccy_resultAmt">resultado</string>
 </resources>
