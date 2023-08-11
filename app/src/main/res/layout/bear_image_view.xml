@@ -11,9 +11,9 @@
         android:layout_width="258dp"
         android:layout_height="280dp"
         android:layout_marginBottom="44dp"
+        android:adjustViewBounds="true"
         android:gravity="center_horizontal"
         android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

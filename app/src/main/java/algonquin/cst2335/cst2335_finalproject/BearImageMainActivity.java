@@ -189,7 +189,7 @@ public class BearImageMainActivity extends AppCompatActivity {
             String heightInput = height.getText().toString();
 
 
-            if (widthInput.isEmpty() && heightInput.isEmpty()) {
+            if (widthInput.isEmpty() || heightInput.isEmpty()) {
                 Toast.makeText(BearImageMainActivity.this, "Both width and height cannot be null", Toast.LENGTH_SHORT).show();
             } else {
                 stringArrayList.clear();
